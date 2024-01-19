@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import stacklineLogo from 'app/public/stackline_logo.svg';
+import stacklineLogo from '@app/public/stackline_logo.svg';
 
 const Navbar = () => {
     return (
