@@ -1,88 +1,52 @@
-import Image from 'next/image';
-import styles from './page.module.css';
+'use client';
 
-export default function Home() {
+import { useEffect, useState } from 'react';
+import Chart from '@/components/visualization/Chart';
+import ProductListing from '@/components/product/ProductListing';
+import Table from '@/components/visualization/Table';
+import { useGetProductsQuery } from '@/lib/redux/productsApi';
+import { IProduct } from '@/types/products';
+
+const PRODUCT_ID = 'B007TIE0GQ';
+
+const DashboardPage = () => {
+    const { data: product, isLoading, isError } = useGetProductsQuery(PRODUCT_ID);
+    const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
+
+    useEffect(() => {
+        if (product) {
+            setSelectedProduct(product.data);
+        }
+    }, [product]);
+
+    if (isLoading) {
+        return 'Loading...';
+    } else if (isError) {
+        return 'Error loading products. Please try again later.';
+    } else if (!selectedProduct) {
+        return 'Product not found.';
+    }
+
     return (
-        <main className={styles.main}>
-            <div className={styles.description}>
-                <p>
-                    Get started by editing&nbsp;
-                    <code className={styles.code}>src/app/page.tsx</code>
-                </p>
-                <div>
-                    <a
-                        href='https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
-                        target='_blank'
-                        rel='noopener noreferrer'>
-                        By{' '}
-                        <Image
-                            src='/vercel.svg'
-                            alt='Vercel Logo'
-                            className={styles.vercelLogo}
-                            width={100}
-                            height={24}
-                            priority
-                        />
-                    </a>
-                </div>
-            </div>
-
-            <div className={styles.center}>
-                <Image
-                    className={styles.logo}
-                    src='/next.svg'
-                    alt='Next.js Logo'
-                    width={180}
-                    height={37}
-                    priority
+        <main className='dashboard'>
+            <section className='listing-container'>
+                <ProductListing
+                    title={selectedProduct.title}
+                    subtitle={selectedProduct.subtitle}
+                    image={selectedProduct.image}
+                    tags={selectedProduct.tags}
                 />
-            </div>
-
-            <div className={styles.grid}>
-                <a
-                    href='https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
-                    className={styles.card}
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    <h2>
-                        Docs <span>-&gt;</span>
-                    </h2>
-                    <p>Find in-depth information about Next.js features and API.</p>
-                </a>
-
-                <a
-                    href='https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
-                    className={styles.card}
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    <h2>
-                        Learn <span>-&gt;</span>
-                    </h2>
-                    <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-                </a>
-
-                <a
-                    href='https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
-                    className={styles.card}
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    <h2>
-                        Templates <span>-&gt;</span>
-                    </h2>
-                    <p>Explore starter templates for Next.js.</p>
-                </a>
-
-                <a
-                    href='https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
-                    className={styles.card}
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    <h2>
-                        Deploy <span>-&gt;</span>
-                    </h2>
-                    <p>Instantly deploy your Next.js site to a shareable URL with Vercel.</p>
-                </a>
+            </section>
+            <div>
+                <section className='chart-container'>
+                    <Chart product={selectedProduct} />
+                </section>
+                <section className='table-container'>
+                    <Table product={selectedProduct} />
+                </section>
             </div>
         </main>
     );
-}
+};
+
+export default DashboardPage;
