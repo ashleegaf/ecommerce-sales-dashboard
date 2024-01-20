@@ -9,7 +9,7 @@ const PRODUCTS_LOCATION = 'src/server/data/products.json';
 
 export async function GET(request: Request, { params }: IParams) {
     try {
-        const file = await fs.readFile(`${process.cwd()}/${PRODUCTS_LOCATION}`, 'utf-8');
+        const file = await fs.readFile(PRODUCTS_LOCATION, 'utf-8');
         if (!file) {
             throw new Error();
         }
