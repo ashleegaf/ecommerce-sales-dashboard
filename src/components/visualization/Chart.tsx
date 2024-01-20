@@ -1,5 +1,8 @@
+'use client';
+
 import { useRef } from 'react';
-import * as Highcharts from 'highcharts';
+import Highcharts from 'highcharts';
+import highchartsAccessibility from "highcharts/modules/accessibility";
 import HighchartsReact from 'highcharts-react-official';
 import { IProduct } from '@/types/products';
 
@@ -8,6 +11,7 @@ interface IChart {
 }
 
 const Chart: React.FC<IChart> = ({ product }) => {
+    highchartsAccessibility(Highcharts);
     const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
 
     const retailSales = Array.from({ length: 12 }, () => 0);
@@ -40,11 +44,12 @@ const Chart: React.FC<IChart> = ({ product }) => {
             enabled: true,
         },
         title: {
-            text: 'Sales',
+            text: 'Retail vs. Wholesale Sales',
             align: 'left',
         },
         xAxis: {
             categories: MONTHS_LIST,
+            labels: { style: { color: '#a5a7aa' } },
         },
         series: [
             {
@@ -58,6 +63,10 @@ const Chart: React.FC<IChart> = ({ product }) => {
                 name: 'Wholesale Sales',
             },
         ],
+        chart: {
+            spacing: [30, 20, 20, 30],
+            height: 550,
+        },
     };
 
     return <HighchartsReact highcharts={Highcharts} options={options} ref={chartComponentRef} />;

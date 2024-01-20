@@ -21,20 +21,16 @@
 
     --tile-start-rgb: 239, 245, 249;
     --tile-end-rgb: 228, 232, 233;
-    --tile-border: conic-gradient(
-        #00000080,
-        #00000040,
-        #00000030,
-        #00000020,
-        #00000010,
-        #00000010,
-        #00000080
-    );
 
     --callout-rgb: 238, 240, 241;
     --callout-border-rgb: 172, 175, 176;
     --card-rgb: 180, 185, 188;
     --card-border-rgb: 131, 134, 135;
+}
+
+nav {
+    background-color: rgb(25, 55, 101);
+    padding-left: 0.75rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -84,8 +80,7 @@ body {
 
 body {
     color: rgb(var(--foreground-rgb));
-    background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
-        rgb(var(--background-start-rgb));
+    background: #edf0f3;
 }
 
 a {
@@ -93,8 +88,3 @@ a {
     text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-    html {
-        color-scheme: dark;
-    }
-}

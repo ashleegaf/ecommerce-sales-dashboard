@@ -1,5 +1,8 @@
+'use client';
+
 import { IProduct, ISale } from '@/types/products';
 import { formatDateToLocaleString, formatNumberToUsDollar } from '@/utils/formatter';
+import styles from '@/styles/components.module.css';
 
 interface ITable {
     product: IProduct;
@@ -19,15 +22,17 @@ const Table: React.FC<ITable> = ({ product }) => {
 
     return (
         <figure>
-            <table>
-                <thead>
+            <table className={styles.table}>
+                <thead className={styles.thead}>
                     <tr>
                         {tableHeaders.map((header) => (
-                            <th key={`${header}-header`}>{header.toUpperCase()}</th>
+                            <th key={`${header}-header`} className={styles.th}>
+                                {header.toUpperCase()}
+                            </th>
                         ))}
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className={styles.tbody}>
                     {weeklySales.map((week) => {
                         const rowData = [];
                         const keys = Object.keys(week) as KeyType[];
@@ -38,9 +43,13 @@ const Table: React.FC<ITable> = ({ product }) => {
                             } else if (key !== 'unitsSold') {
                                 value = formatNumberToUsDollar(value);
                             }
-                            rowData.push(<td key={`${value}-data`}>{value}</td>);
+                            rowData.push(
+                                <td key={`${value}-data`} className={styles.td}>
+                                    {value}
+                                </td>,
+                            );
                         }
-                        return <tr key={`${week.weekEnding}-row`}>{rowData}</tr>;
+                        return <tr key={`${week.weekEnding}-row`} className={styles.tr}>{rowData}</tr>;
                     })}
                 </tbody>
             </table>
