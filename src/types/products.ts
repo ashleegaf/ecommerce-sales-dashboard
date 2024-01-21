@@ -1,3 +1,5 @@
+import { type ObjectId } from "mongodb";
+
 export interface IReview {
     customer: string;
     review: string;
@@ -13,7 +15,8 @@ export interface ISale {
 }
 
 export interface IProduct {
-    id: string;
+    _id: ObjectId;
+    productId: string;
     title: string;
     image: string;
     subtitle: string;
