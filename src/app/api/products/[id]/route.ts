@@ -10,7 +10,6 @@ export async function GET(request: Request, { params }: IParams) {
         await mongodb.connect();
         const products = mongodb.db('ecommerce').collection<IProduct>('product');
         const selectedProduct = await products.findOne({ productId: params.id });
-        console.log(selectedProduct);
         return Response.json({ data: selectedProduct }, { status: 201 });
     } catch (error) {
         return new Response(`Error retrieving products.`, {
