@@ -6,9 +6,9 @@ interface IParams {
 }
 
 export async function GET(request: Request, { params }: IParams) {
+    const connectedDb = await mongodb.connect();
     try {
-        await mongodb.connect();
-        const products = mongodb.db('ecommerce').collection<IProduct>('product');
+        const products = connectedDb.db('ecommerce').collection<IProduct>('product');
         const selectedProduct = await products.findOne({ productId: params.id });
         return Response.json({ data: selectedProduct }, { status: 201 });
     } catch (error) {
@@ -16,6 +16,6 @@ export async function GET(request: Request, { params }: IParams) {
             status: 404,
         });
     } finally {
-        await mongodb.close();
+        await connectedDb.close();
     }
 }
