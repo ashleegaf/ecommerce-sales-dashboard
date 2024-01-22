@@ -33,8 +33,6 @@
 
 - Reference the types stored in the [types/products](https://github.com/ashleegaf/ecommerce-sales-dashboard/blob/main/src/types/products.ts) file
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ## Getting Started
 
 **Create .env file variables:**
@@ -67,4 +65,3 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Acknowledgements
 
 - [Skill Icons](https://skillicons.dev)
-- [DB Diagram](https://dbdiagram.io/)
