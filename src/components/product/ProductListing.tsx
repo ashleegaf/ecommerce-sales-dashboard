@@ -13,10 +13,10 @@ interface IProductListing {
 const ProductListing: React.FC<IProductListing> = ({ title, subtitle, image, tags }) => {
     return (
         <>
-            <Image src={image} alt={`${title} image`} width={300} height={300} priority />
+            <Image src={image} alt={`${title} image`} width={200} height={200} priority />
             <header className={styles.header}>
-                <h1 className={styles.h1}>{title}</h1>
-                <h3 className={styles.h3}>{subtitle}</h3>
+                <h3>{title}</h3>
+                <h5 className={styles.h5}>{subtitle}</h5>
             </header>
             <div className={styles.tagContainer}>
                 {tags.map((tag) => (

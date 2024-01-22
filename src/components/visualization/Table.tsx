@@ -23,7 +23,7 @@ const Table: React.FC<ITable> = ({ product }) => {
     return (
         <figure>
             <table className={styles.table}>
-                <thead className={styles.thead}>
+                <thead>
                     <tr>
                         {tableHeaders.map((header) => (
                             <th key={`${header}-header`} className={styles.th}>
@@ -32,7 +32,7 @@ const Table: React.FC<ITable> = ({ product }) => {
                         ))}
                     </tr>
                 </thead>
-                <tbody className={styles.tbody}>
+                <tbody>
                     {weeklySales.map((week) => {
                         const rowData = [];
                         const keys = Object.keys(week) as KeyType[];
@@ -49,7 +49,7 @@ const Table: React.FC<ITable> = ({ product }) => {
                                 </td>,
                             );
                         }
-                        return <tr key={`${week.weekEnding}-row`} className={styles.tr}>{rowData}</tr>;
+                        return <tr key={`${week.weekEnding}-row`}>{rowData}</tr>;
                     })}
                 </tbody>
             </table>

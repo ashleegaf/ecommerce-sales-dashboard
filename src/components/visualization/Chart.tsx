@@ -46,6 +46,7 @@ const Chart: React.FC<IChart> = ({ product }) => {
         title: {
             text: 'Retail vs. Wholesale Sales',
             align: 'left',
+            style: { fontSize: '1rem', fontWeight: '500' }
         },
         xAxis: {
             categories: MONTHS_LIST,

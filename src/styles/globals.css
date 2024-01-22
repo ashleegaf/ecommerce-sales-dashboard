@@ -26,6 +26,10 @@
     --callout-border-rgb: 172, 175, 176;
     --card-rgb: 180, 185, 188;
     --card-border-rgb: 131, 134, 135;
+
+    --text-color: #b3b5b8;
+    --secondary-text-color: #a5a7aa;
+    --border-color: #ede9e9;
 }
 
 nav {
@@ -87,4 +91,3 @@ a {
     color: inherit;
     text-decoration: none;
 }
-
